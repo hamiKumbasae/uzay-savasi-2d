@@ -1,6 +1,11 @@
 # Uzay Savaşı 2D — Hikâye, Endless ve Seviye Sistemi
 
-Java Swing ile hazırlanmış, IntelliJ IDEA'da doğrudan açılabilen 2D uzay savaşı projesidir.
+2D uzay savaşı oyunu. İki sürümü var:
+
+- **Web sürümü** (`index.html`, `css/`, `js/`): tarayıcıda, bilgisayarda ve telefonda oynanır. Kurulum gerekmez; `index.html` dosyasını açmak yeterli.
+- **Java sürümü** (`src/main/java/uzaysavasi/`): Java Swing ile masaüstü uygulaması.
+
+İki sürüm aynı oyun kurallarını kullanır. Web sürümünde ayrıca dokunmatik kontrol var: parmakla sürükle, ateş otomatik; ekrandaki `II` duraklatır, `B` bomba atar. Kayıtlar web sürümünde tarayıcıda (localStorage), Java sürümünde `~/.uzay_savasi_2d` klasöründe tutulur.
 
 ## Yeni eklenen sistemler
 
@@ -90,6 +95,17 @@ Coin, geliştirmeler, hikâye ilerlemesi, en yüksek oyuncu seviyesi ve skorlar 
 - Düşman mermisinin çarpışma alanı görseliyle daha uyumlu hale getirildi.
 
 ## Kod yapısı
+
+Web sürümü (`js/`):
+
+- `oyun.js` — oyun döngüsü, menü ekranları, klavye/fare/dokunmatik girişi, ekrana sığdırma
+- `dunya.js` — tek bir oyun oturumu: düşmanlar, mermiler, çarpışmalar, skor, HUD
+- `varliklar.js` — oyuncu, düşman, boss, mermi, asteroit, güçlendirme, parçacık, yıldız
+- `veri.js` — gemiler, zorluklar, hikâye bölümleri, silah ve güçlendirme adları
+- `altyapi.js` — ses, kayıt ve seviye sistemi
+- `cizim.js` — ekran boyutu, renkler ve çizim yardımcıları
+
+Java sürümü (`src/main/java/uzaysavasi/`):
 
 - `OyunPaneli` — oyun döngüsü, menü ekranları, klavye/fare girişi
 - `OyunDunyasi` — tek bir oyun oturumu: düşmanlar, mermiler, çarpışmalar, skor, HUD
