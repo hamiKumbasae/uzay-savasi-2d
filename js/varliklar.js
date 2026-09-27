@@ -298,7 +298,9 @@ class Boss {
         if (this.y < 70) {
             this.y += 75 * dt;
         } else {
-            this.x = GENISLIK / 2 - this.genislik / 2 + Math.sin(this.zaman * 0.9) * 210;
+            // Dar ekranda boss kenardan taşmasın diye salınım daralır.
+            const salinim = Math.min(210, GENISLIK / 2 - this.genislik / 2 - 10);
+            this.x = GENISLIK / 2 - this.genislik / 2 + Math.sin(this.zaman * 0.9) * salinim;
         }
         this.atisSayaci -= dt;
     }
@@ -327,13 +329,16 @@ class Boss {
         g.fillStyle = rgb(RENK.RED);
         Cizim.ovalDolu(g, ix + 98, iy + 53, 24, 24);
 
+        const cubukX = Math.round(GENISLIK * 0.1625);
+        const cubukW = Math.round(GENISLIK * 0.675);
+        // Can çubuğu HUD panellerinin üstüne binmesin diye kalplerin altında durur.
         g.fillStyle = rgb([20, 20, 35]);
-        Cizim.yuvarlakDolu(g, 130, 18, 540, 24, 12);
+        Cizim.yuvarlakDolu(g, cubukX, 176, cubukW, 24, 12);
         g.fillStyle = rgb([255, 65, 110]);
-        Cizim.yuvarlakDolu(g, 134, 22, Math.trunc(532 * (this.can / this.maksimumCan)), 16, 8);
+        Cizim.yuvarlakDolu(g, cubukX + 4, 180, Math.trunc((cubukW - 8) * (this.can / this.maksimumCan)), 16, 8);
         g.fillStyle = rgb(RENK.WHITE);
         g.font = Cizim.font('bold', 14);
-        g.fillText('BOSS', 72, 37);
+        g.fillText('BOSS', cubukX - 58, 195);
     }
 
     hasarAl(miktar) {

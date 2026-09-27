@@ -1,8 +1,22 @@
 'use strict';
 
-// Oyun alanı her zaman bu mantıksal boyutta çizilir; ekrana sığdırmak için ölçeklenir.
-const GENISLIK = 800;
-const YUKSEKLIK = 820;
+// Oyun alanının mantıksal boyutu; ekrana sığdırmak için ölçeklenir.
+// Bilgisayarda 800×820. Dikey telefonda alan daraltılıp ekran boyunca uzatılır,
+// böylece ekranın tamamı kullanılır ve yazılar okunacak kadar büyük kalır.
+let GENISLIK = 800;
+let YUKSEKLIK = 820;
+const MENU_YUKSEKLIGI = 820;
+
+/** Ekran boyutuna göre alanı ayarlar; boyut değiştiyse true döner. */
+function alaniAyarla(ekranGenisligi, ekranYuksekligi) {
+    const oran = ekranYuksekligi / ekranGenisligi;
+    const genislik = ekranGenisligi < 700 && oran > 1.2 ? 560 : 800;
+    const yukseklik = Math.round(Math.min(1400, Math.max(820, genislik * oran)));
+    const degisti = genislik !== GENISLIK || yukseklik !== YUKSEKLIK;
+    GENISLIK = genislik;
+    YUKSEKLIK = yukseklik;
+    return degisti;
+}
 
 const RENK = {
     CYAN: [0, 255, 255],
@@ -105,10 +119,20 @@ const Cizim = {
         g.stroke();
     },
 
+    /** Metni en fazla maksGenislik kadar yer kaplayacak şekilde, gerekirse küçülterek yazar. */
+    sigdirYazi(g, metin, x, y, maksGenislik, boyut, stil = 'bold', aile) {
+        g.font = this.font(stil, boyut, aile);
+        const sw = g.measureText(metin).width;
+        if (sw > maksGenislik) g.font = this.font(stil, Math.floor(boyut * maksGenislik / sw), aile);
+        g.fillText(metin, x, y);
+        return Math.min(sw, maksGenislik);
+    },
+
     ortaliYazi(g, metin, y, boyut, renk) {
         g.font = this.font('bold', boyut);
         g.fillStyle = rgb(renk);
-        const sw = g.measureText(metin).width;
-        g.fillText(metin, GENISLIK / 2 - sw / 2, y);
+        const maks = GENISLIK - 30;
+        const sw = Math.min(g.measureText(metin).width, maks);
+        this.sigdirYazi(g, metin, GENISLIK / 2 - sw / 2, y, maks, boyut);
     }
 };

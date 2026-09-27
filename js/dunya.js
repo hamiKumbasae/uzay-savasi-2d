@@ -544,21 +544,25 @@ class OyunDunyasi {
 
     hudCiz(g) {
         const o = this.oyuncu;
+        const sagW = Math.min(310, (GENISLIK - 36) / 2);
+        const solW = Math.min(270, sagW);
+        const sagX = GENISLIK - 12 - sagW;
         g.fillStyle = 'rgba(0,0,0,0.61)';
-        Cizim.yuvarlakDolu(g, 12, 10, 270, 102, 18);
-        Cizim.yuvarlakDolu(g, GENISLIK - 322, 10, 310, 102, 18);
-        g.font = Cizim.font('bold', 17);
+        Cizim.yuvarlakDolu(g, 12, 10, solW, 102, 18);
+        Cizim.yuvarlakDolu(g, sagX, 10, sagW, 102, 18);
         g.fillStyle = rgb(RENK.WHITE);
-        g.fillText(`Skor: ${this.skor}`, 26, 34);
-        g.fillText(`Coin: ${this.coin}`, 26, 58);
-        g.fillText(this.oyunModu === OYUN_MODU.HIKAYE ? `Bölüm: ${this.bolum}/5` : `Dalga: ${this.bolum}`, 26, 82);
-        g.fillText(`Oyuncu seviyesi: ${this.seviyeSistemi.seviye}`, 26, 105);
+        const solMaks = solW - 26;
+        Cizim.sigdirYazi(g, `Skor: ${this.skor}`, 26, 34, solMaks, 17);
+        Cizim.sigdirYazi(g, `Coin: ${this.coin}`, 26, 58, solMaks, 17);
+        Cizim.sigdirYazi(g, this.oyunModu === OYUN_MODU.HIKAYE ? `Bölüm: ${this.bolum}/5` : `Dalga: ${this.bolum}`,
+            26, 82, solMaks, 17);
+        Cizim.sigdirYazi(g, `Oyuncu seviyesi: ${this.seviyeSistemi.seviye}`, 26, 105, solMaks, 17);
 
-        g.font = Cizim.font('bold', 15);
-        g.fillText(this.hedefMetni(), GENISLIK - 306, 34);
-        g.fillText(`Silah: ${SILAH_ADI[o.silah]}`, GENISLIK - 306, 58);
-        g.fillText(`Kalıcı: ${SILAH_ADI[o.kaliciSilah]}`, GENISLIK - 306, 80);
-        g.fillText(`Bomba: ${o.bombaSayisi}`, GENISLIK - 306, 102);
+        const sagMaks = sagW - 28;
+        Cizim.sigdirYazi(g, this.hedefMetni(), sagX + 16, 34, sagMaks, 15);
+        Cizim.sigdirYazi(g, `Silah: ${SILAH_ADI[o.silah]}`, sagX + 16, 58, sagMaks, 15);
+        Cizim.sigdirYazi(g, `Kalıcı: ${SILAH_ADI[o.kaliciSilah]}`, sagX + 16, 80, sagMaks, 15);
+        Cizim.sigdirYazi(g, `Bomba: ${o.bombaSayisi}`, sagX + 16, 102, sagMaks, 15);
 
         this.xpCubuguCiz(g);
         for (let i = 0; i < o.maksimumCan; i++) {
@@ -568,9 +572,9 @@ class OyunDunyasi {
     }
 
     xpCubuguCiz(g) {
-        const x = 146;
+        const x = Math.round(GENISLIK * 0.1825);
         const y = 121;
-        const w = 508;
+        const w = Math.round(GENISLIK * 0.635);
         const h = 16;
         g.fillStyle = rgb([10, 15, 35], 210);
         Cizim.yuvarlakDolu(g, x, y, w, h, 9);
@@ -581,7 +585,7 @@ class OyunDunyasi {
         g.font = Cizim.font('bold', 12);
         g.fillStyle = rgb(RENK.WHITE);
         const metin = `XP ${this.seviyeSistemi.mevcutXp}/${this.seviyeSistemi.gerekenXp()}`;
-        g.fillText(metin, GENISLIK / 2 - g.measureText(metin).width / 2, y + 13);
+        g.fillText(metin, x + w / 2 - g.measureText(metin).width / 2, y + 13);
     }
 
     static kalpCiz(g, x, y, b) {
