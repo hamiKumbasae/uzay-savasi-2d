@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -156,20 +158,11 @@ public final class Oyuncu {
     }
 
     public void kaliciSilahAc(SilahTuru tur) {
-        if (silahSirasi(tur) > silahSirasi(kaliciSilahTuru)) {
+        // SilahTuru sabitleri güç sırasına göre dizilidir.
+        if (tur.ordinal() > kaliciSilahTuru.ordinal()) {
             kaliciSilahTuru = tur;
             if (ozelSilahSuresi <= 0) silahTuru = tur;
         }
-    }
-
-    private int silahSirasi(SilahTuru tur) {
-        return switch (tur) {
-            case TEKLI -> 0;
-            case CIFTLI -> 1;
-            case UCLU -> 2;
-            case LAZER -> 3;
-            case TAKIP_FUZESI -> 4;
-        };
     }
 
     public void canEkle(int miktar) { can = Math.min(maksimumCan, can + miktar); }
@@ -199,13 +192,10 @@ public final class Oyuncu {
     public int getCan() { return can; }
     public int getMaksimumCan() { return maksimumCan; }
     public boolean hayattaMi() { return can > 0; }
-    public boolean kalkanAktifMi() { return kalkanSuresi > 0; }
-    public double getKalkanSuresi() { return kalkanSuresi; }
     public SilahTuru getSilahTuru() { return silahTuru; }
     public SilahTuru getKaliciSilahTuru() { return kaliciSilahTuru; }
     public int getBombaSayisi() { return bombaSayisi; }
     public double getHasarCarpani() { return temelHasarCarpani * seviyeHasarCarpani; }
     public double getAtisCarpani() { return temelAtisCarpani * seviyeAtisCarpani; }
     public double getAtisSuresiCarpani() { return hizliAtesSuresi > 0 ? 0.48 : 1.0; }
-    public GemiTuru getGemiTuru() { return gemiTuru; }
 }

@@ -57,14 +57,12 @@ Java Swing ile hazırlanmış, IntelliJ IDEA'da doğrudan açılabilen 2D uzay s
 
 ## IntelliJ IDEA ile açma
 
-1. ZIP dosyasını çıkar.
-2. IntelliJ IDEA'yı aç.
-3. **File → Open** seçeneğini kullan.
-4. `UzaySavasi2D_TamSurum` ana klasörünü seç.
-5. Sorulursa **Trust Project** seç.
-6. Project SDK olarak Java 17 veya daha yeni bir JDK seç.
-7. `src/main/java/Main.java` dosyasını aç.
-8. `main` metodunun yanındaki yeşil çalıştırma simgesine bas.
+1. IntelliJ IDEA'yı aç.
+2. **File → Open** ile `uzay-savasi-2d` klasörünü seç.
+3. Sorulursa **Trust Project** seç.
+4. Project SDK olarak Java 17 veya daha yeni bir JDK seç.
+5. `src/main/java/uzaysavasi/Main.java` dosyasını aç.
+6. `main` metodunun yanındaki yeşil çalıştırma simgesine bas.
 
 ## Terminal ile çalıştırma
 
@@ -72,8 +70,8 @@ Projenin ana klasöründe:
 
 ```bash
 mkdir -p out
-javac --release 17 -encoding UTF-8 -d out src/main/java/*.java
-java -cp out Main
+javac --release 17 -encoding UTF-8 -d out src/main/java/uzaysavasi/*.java
+java -cp out uzaysavasi.Main
 ```
 
 ## Kayıt dosyaları
@@ -90,3 +88,11 @@ Coin, geliştirmeler, hikâye ilerlemesi, en yüksek oyuncu seviyesi ve skorlar 
 - Düşman mermileri daha büyük bir parlama ile görünür.
 - Hasar alındığında çarpışma kaynağı ekranda yazılır.
 - Düşman mermisinin çarpışma alanı görseliyle daha uyumlu hale getirildi.
+
+## Kod yapısı
+
+- `OyunPaneli` — oyun döngüsü, menü ekranları, klavye/fare girişi
+- `OyunDunyasi` — tek bir oyun oturumu: düşmanlar, mermiler, çarpışmalar, skor, HUD
+- `SesYoneticisi` — efektleri açılışta üretir, çalarken hazır klibi kullanır
+- `KayitYoneticisi` — coin, geliştirme, ilerleme ve skor kaydı
+- Diğer sınıflar oyundaki tek tek nesneler (`Oyuncu`, `Dusman`, `Boss`, `Mermi`...) ve türleri (`*Turu`, `Zorluk`, `HikayeBolumu`)

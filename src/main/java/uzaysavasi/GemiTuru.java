@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 import java.awt.Color;
 
 public enum GemiTuru {

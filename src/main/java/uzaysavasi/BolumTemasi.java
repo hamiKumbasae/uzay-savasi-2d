@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 public enum BolumTemasi {
     UZAY_BOSLUGU("Uzay Boşluğu"),
     ASTEROIT_ALANI("Asteroit Alanı"),

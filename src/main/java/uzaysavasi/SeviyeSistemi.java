@@ -1,13 +1,13 @@
+package uzaysavasi;
+
 public final class SeviyeSistemi {
     private int seviye = 1;
     private int mevcutXp;
-    private int toplamXp;
 
     public int xpEkle(int miktar) {
         if (miktar <= 0) return 0;
         int oncekiSeviye = seviye;
         mevcutXp += miktar;
-        toplamXp += miktar;
         while (mevcutXp >= gerekenXpGetir()) {
             int gereken = gerekenXpGetir();
             mevcutXp -= gereken;
@@ -26,5 +26,4 @@ public final class SeviyeSistemi {
 
     public int getSeviye() { return seviye; }
     public int getMevcutXp() { return mevcutXp; }
-    public int getToplamXp() { return toplamXp; }
 }

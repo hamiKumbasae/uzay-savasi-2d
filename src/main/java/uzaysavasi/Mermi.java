@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -97,7 +99,6 @@ public final class Mermi {
     }
 
     public int getHasar() { return hasar; }
-    public boolean oyuncuMermisiMi() { return oyuncuMermisi; }
     public boolean deliciMi() { return delici; }
     public boolean aktifMi() { return aktif; }
     public void yokEt() { aktif = false; }

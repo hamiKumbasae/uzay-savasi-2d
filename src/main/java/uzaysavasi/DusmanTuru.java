@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 public enum DusmanTuru {
     NORMAL,
     HIZLI,

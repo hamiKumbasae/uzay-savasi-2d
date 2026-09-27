@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 public enum Zorluk {
     KOLAY("Kolay", 0.80, 0.78, 0.70, 1.00),
     ORTA("Orta", 1.00, 1.00, 1.00, 1.20),

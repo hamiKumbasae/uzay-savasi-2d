@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -82,6 +84,4 @@ public final class Boss {
     public double getMerkezX() { return x + genislik / 2.0; }
     public double getMerkezY() { return y + yukseklik / 2.0; }
     public boolean aktifMi() { return aktif; }
-    public int getMaksimumCan() { return maksimumCan; }
-    public int getCan() { return Math.max(0, can); }
 }

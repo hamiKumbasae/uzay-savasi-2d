@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 public enum OyunDurumu {
     ANA_MENU,
     HIKAYE_BOLUM_SECIMI,

@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 public enum HikayeBolumu {
     ILK_TEMAS(
             1,
@@ -97,6 +99,4 @@ public enum HikayeBolumu {
     public String getAciklama() { return aciklama; }
     public BolumTemasi getTema() { return tema; }
     public int getDusmanHedefi() { return dusmanHedefi; }
-    public int getAsteroitHedefi() { return asteroitHedefi; }
-    public int getSureHedefi() { return sureHedefi; }
 }

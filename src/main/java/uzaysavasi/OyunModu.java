@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 public enum OyunModu {
     HIKAYE("Hikâye Modu"),
     ENDLESS("Endless Mod");

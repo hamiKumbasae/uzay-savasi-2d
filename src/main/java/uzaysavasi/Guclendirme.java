@@ -1,3 +1,5 @@
+package uzaysavasi;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -31,7 +33,7 @@ public final class Guclendirme {
         g.setColor(renk);
         g.fillRoundRect(ix, iy, 36, 36, 12, 12);
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 14));
+        g.setFont(Cizim.font(Font.BOLD, 14));
         String simge = simgeGetir();
         int sw = g.getFontMetrics().stringWidth(simge);
         g.drawString(simge, ix + 18 - sw / 2, iy + 23);
