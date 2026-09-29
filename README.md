@@ -4,6 +4,7 @@
 
 - **Web sürümü** (`index.html`, `css/`, `js/`): tarayıcıda, bilgisayarda ve telefonda oynanır. Kurulum gerekmez; `index.html` dosyasını açmak yeterli.
 - **Java sürümü** (`src/main/java/uzaysavasi/`): Java Swing ile masaüstü uygulaması.
+- **Android sürümü** (`android/`): web sürümünün [Capacitor](https://capacitorjs.com) ile paketlenmiş hâli, telefona APK olarak kurulur.
 
 İki sürüm aynı oyun kurallarını kullanır. Web sürümünde ayrıca dokunmatik kontrol var: parmakla sürükle, ateş otomatik; ekrandaki `II` duraklatır, `B` bomba atar. Kayıtlar web sürümünde tarayıcıda (localStorage), Java sürümünde `~/.uzay_savasi_2d` klasöründe tutulur.
 
@@ -59,6 +60,27 @@
 - `R`: Oyun bittikten sonra yeniden başlat
 - `ESC`: Geri dön / ana menü
 - Menülerde ok tuşları, `ENTER` veya fare kullanılabilir.
+
+## Android (Capacitor)
+
+Web sürümü, kodu değiştirilmeden Android uygulaması olarak paketlenir. Oyun dosyaları uygulamanın içindedir, internet gerekmez, reklam yoktur. Kayıtlar uygulama verisinde saklanır ve uygulama güncellenince korunur. Uygulama dikey ve tam ekran açılır.
+
+- Ekranda parmakla sürükle, ateş otomatik; `II` duraklatır, `B` bomba atar.
+- Android'in geri tuşu oyunda duraklatır, duraklatılmışken ve alt ekranlarda ana menüye döner, ana menüde uygulamayı arka plana alır.
+- Uygulamadan çıkınca, bildirim açılınca ya da ekran kilitlenince oyun kendiliğinden duraklar.
+
+**Hazır test APK'sı:** `main` ya da `claude/` dallarına her gönderimde GitHub Actions APK'yı derler ve [Test APK sürümüne](https://github.com/hamiKumbasae/uzay-savasi-2d/releases/tag/test-apk) yükler: [uzay-savasi-2d.apk](https://github.com/hamiKumbasae/uzay-savasi-2d/releases/download/test-apk/uzay-savasi-2d.apk). Telefonda indirip açınca "bilinmeyen kaynaklardan yükleme" izni istenir. Tüm test APK'ları aynı test anahtarıyla imzalanır (`android/app/test.keystore`, mağaza anahtarı değildir); yeni sürüm eskisinin üstüne kurulur, kayıtlar silinmez.
+
+Kendin derlemek için gerekenler: Node.js 22+, Android Studio (Android SDK ve JDK 21).
+
+```
+npm install
+npm run sync      # web dosyalarını www/ klasörüne kopyalar ve android/ projesine aktarır
+npm run open      # Android Studio'da açar (Run ile telefona kurulur)
+npm run apk       # ya da doğrudan test APK'sı: android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+`index.html`, `css/` veya `js/` değiştiğinde `npm run sync` yeniden çalıştırılmalı. `www/` üretilen bir klasördür, depoya eklenmez.
 
 ## IntelliJ IDEA ile açma
 
