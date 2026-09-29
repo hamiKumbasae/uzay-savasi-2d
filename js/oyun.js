@@ -299,8 +299,10 @@
         if (duraklatildi) {
             karart(180);
             Cizim.ortaliYazi(g, 'DURAKLATILDI', 360, 44, RENK.WHITE);
-            Cizim.ortaliYazi(g, 'Devam etmek için P', 410, 22, RENK.LIGHT_GRAY);
-            Cizim.ortaliYazi(g, 'Ana menü için ESC', 444, 18, RENK.LIGHT_GRAY);
+            if (!dokunmatik) {
+                Cizim.ortaliYazi(g, 'Devam etmek için P', 410, 22, RENK.LIGHT_GRAY);
+                Cizim.ortaliYazi(g, 'Ana menü için ESC', 444, 18, RENK.LIGHT_GRAY);
+            }
             ikiDugme('DEVAM', () => oyunDurumunuDegistir('OYNUYOR'), 'MENÜ', kaydedipMenuyeDon, 490);
             return;
         }
@@ -704,6 +706,22 @@
         if (document.hidden) odakKaybi();
     });
     window.addEventListener('blur', odakKaybi);
+    document.addEventListener('pause', odakKaybi); // Android uygulaması (Capacitor) arka plana geçince
+
+    /**
+     * Android geri tuşu: oyunda duraklatır, duraklatılmışken ve alt ekranlarda ana menüye döner.
+     * Ana menüde false döner; uygulama arka plana alınır.
+     */
+    function geri() {
+        switch (durum) {
+            case 'ANA_MENU': return false;
+            case 'OYNUYOR': oyunDurumunuDegistir('DURAKLATILDI'); break;
+            case 'DURAKLATILDI':
+            case 'BOLUM_GECISI': kaydedipMenuyeDon(); break;
+            default: anaMenuyeDon();
+        }
+        return true;
+    }
 
     // --- Ekrana sığdırma ---
 
@@ -728,6 +746,6 @@
     window.addEventListener('resize', boyutla);
     boyutla();
 
-    window.uzaySavasi = { durum: () => durum, dunya: () => dunya };
+    window.uzaySavasi = { durum: () => durum, dunya: () => dunya, geri };
     requestAnimationFrame(kare);
 })();
